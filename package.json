@@ -1,11 +1,16 @@
 {
   "name": "sigle-step-kdf-nist",
+  "repository": {
+    "url": "https://github.com/sechosebio/sigle-step-kdf-nist"
+  },
   "version": "0.0.1",
   "description": "Sigle-Step Key-Derivation Function following NIST SP 800-56C",
   "scripts": {
     "test": "NODE_ENV=test jest",
     "build": "tsc"
   },
+  "types": "build/index.d.ts",
+  "main": "build/index.js",
   "keywords": [
     "kdf",
     "nist",

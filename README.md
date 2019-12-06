@@ -3,7 +3,7 @@
 
 # Single Step KDF (NIST SP 800-56C)
 
-Single-Step Key Derivation function following [NIST SP 800-56C revision 1, chapter 4](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Cr1.pdf) in TypeScript/JavaScript.
+Single-Step Key Derivation function following [NIST SP 800-56C revision 1, chapter 4](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Cr1.pdf) in TypeScript/JavaScript fully compatible with NodeJS.
 
 ## Quick start
 

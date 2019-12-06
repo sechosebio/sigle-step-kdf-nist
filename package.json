@@ -1,6 +1,7 @@
 {
   "name": "sigle-step-kdf-nist",
   "repository": {
+    "type": "git",
     "url": "https://github.com/sechosebio/sigle-step-kdf-nist"
   },
   "version": "0.0.1",

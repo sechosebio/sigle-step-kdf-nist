@@ -1,21 +1,19 @@
 # Single Step KDF (NIST SP 800-56C)
 
-Single-Step Key Derivation function following [NIST SP 800-56C revision 1, chapter 4](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Cr1.pdf) in TypeScript.
+Single-Step Key Derivation function following [NIST SP 800-56C revision 1, chapter 4](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Cr1.pdf) in TypeScript/JavaScript.
 
 ## Quick start
 
 ```
 
-import { hexToBytes, bytesToHex } from "single-step-kdf/utils";
-
-import SingleStepKDF from "single-step-kdf";
+import { singleStepKDF, hexToBytes, bytesToHex } from "single-step-kdf";
 
 const hexSingleStepKDF = () => {
   const sharedSecretString = "test";
   const sharedSecret: Uint8Array = hexToBytes(sharedSecretString);
   const fixedInfo = JSON.stringify({ info: "some info" });
 
-  const kdf = SingleStepKDF.derive(
+  const kdf = singleStepKDF(
     "sha256",
     sharedSecret,
     32,

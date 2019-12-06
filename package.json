@@ -1,0 +1,31 @@
+{
+  "name": "sigle-step-kdf-nist",
+  "version": "1.0.0",
+  "description": "Sigle-Step Key-Derivation Function following NIST SP 800-56C",
+  "scripts": {
+    "test": "NODE_ENV=test jest",
+    "build": "tsc"
+  },
+  "keywords": [
+    "kdf",
+    "nist",
+    "hkdf",
+    "800-56c"
+  ],
+  "author": "",
+  "license": "Apache-2.0",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "@types/node": "^12.12.14",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.2.0",
+    "ts-node": "^8.5.4",
+    "typescript": "3.7.2"
+  }
+}

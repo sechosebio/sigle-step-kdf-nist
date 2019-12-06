@@ -1,33 +1,6 @@
 import crypto from "crypto";
-
-/**
- * Convert a hex string to a byte array
- * @param hex
- */
-export const hexToBytes = (hex: string): Uint8Array => {
-  const bytes = [];
-  for (let c = 0; c < hex.length; c += 2)
-    bytes.push(parseInt(hex.substr(c, 2), 16));
-  return new Uint8Array(bytes);
-};
-
-/**
- * Converts a byte array to a hex string
- * @param bytes
- */
-export const bytesToHex = (bytes: Uint8Array): string => {
-  const hex = [];
-  for (let i = 0; i < bytes.length; i++) {
-    const current = bytes[i] < 0 ? bytes[i] + 256 : bytes[i];
-    const hexString = (0xff & current).toString(16);
-    if (hexString.length == 1) {
-      hex.push("0");
-    }
-    hex.push(hexString);
-  }
-
-  return hex.join("");
-};
+import { Hash } from "./types";
+import { hexToBytes } from "./utils";
 
 class IllegalArgumentException extends Error {
   public constructor(msg: string) {
@@ -95,6 +68,7 @@ class SingleStepKDF {
    *
    * Derives a key with the given parameters. At the moment, just derivation using SHA-256 is available.
    *
+   * @param hash           The hash to use.
    * @param sharedSecretZ  Known as `Z` in the spec: a byte string that represents the shared secret
    * @param outLengthBytes Knnown as `L` in the spec: positive integer that indicates the lenght (in bytes) of the secret
    *                       keying material to be derived; how long the output will be.
@@ -108,6 +82,7 @@ class SingleStepKDF {
    * @throws IllegalArgumentException if `outLengthBytes` is 0 bytes.
    */
   public derive(
+    hash: Hash,
     sharedSecretZ: Uint8Array,
     outLengthBytes: number,
     fixedInfo: Uint8Array
@@ -151,7 +126,7 @@ class SingleStepKDF {
 
     do {
       crypto
-        .createHash("sha256")
+        .createHash(hash)
         .update(this.intTo4Bytes(counter))
         .update(sharedSecretZ)
         .update(fixedInfo)

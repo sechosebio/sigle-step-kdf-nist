@@ -1,6 +1,6 @@
 {
   "name": "sigle-step-kdf-nist",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Sigle-Step Key-Derivation Function following NIST SP 800-56C",
   "scripts": {
     "test": "NODE_ENV=test jest",

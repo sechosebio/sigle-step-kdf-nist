@@ -1,4 +1,4 @@
-[![npm version](https://badge.fury.io/js/sigle-step-kdf-nist.svg)](https://badge.fury.io/js/sigle-step-kdf-nist)
+![npm](https://img.shields.io/npm/v/sigle-step-kdf-nist)
 [![Build Status](https://travis-ci.org/sechosebio/sigle-step-kdf-nist.svg?branch=master)](https://travis-ci.org/sechosebio/sigle-step-kdf-nist)
 
 # Single Step KDF (NIST SP 800-56C)

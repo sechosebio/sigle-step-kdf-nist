@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/sechosebio/sigle-step-kdf-nist"
   },
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Sigle-Step Key-Derivation Function following NIST SP 800-56C",
   "scripts": {
     "test": "NODE_ENV=test jest",

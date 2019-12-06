@@ -1,3 +1,6 @@
+[![npm version](https://badge.fury.io/js/sigle-step-kdf-nist.svg)](https://badge.fury.io/js/sigle-step-kdf-nist)
+[![Build Status](https://travis-ci.org/sechosebio/sigle-step-kdf-nist.svg?branch=master)](https://travis-ci.org/sechosebio/sigle-step-kdf-nist)
+
 # Single Step KDF (NIST SP 800-56C)
 
 Single-Step Key Derivation function following [NIST SP 800-56C revision 1, chapter 4](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Cr1.pdf) in TypeScript/JavaScript.

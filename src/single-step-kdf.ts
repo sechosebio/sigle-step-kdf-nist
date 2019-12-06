@@ -50,52 +50,51 @@ const getHashLength = (hash: string): number => {
   }
 };
 
-class SingleStepKDF {
-  private intTo4Bytes(counter: number): Uint8Array {
-    return hexToBytes(counter.toString().padStart(7, "0"));
+const intTo4Bytes = (counter: number): Uint8Array => {
+  return hexToBytes(counter.toString().padStart(7, "0"));
+};
+
+const checkOutLength = (outLengthBytes: number): void => {
+  if (outLengthBytes <= 0) {
+    throw new IllegalArgumentException(
+      "outLengthBytes must be greatear than 0"
+    );
   }
+};
 
-  private checkOutLength(outLengthBytes: number): void {
-    if (outLengthBytes <= 0) {
-      throw new IllegalArgumentException(
-        "outLengthBytes must be greatear than 0"
-      );
-    }
-  }
+/**
+ * KDM - a one step key derivation function as described in NIST SP 800-56C REV 1 Chapter 4.1.
+ *
+ * Derives a key with the given parameters. At the moment, just derivation using SHA-256 is available.
+ *
+ * @param hash           The hash to use.
+ * @param sharedSecretZ  Known as `Z` in the spec: a byte string that represents the shared secret
+ * @param outLengthBytes Knnown as `L` in the spec: positive integer that indicates the lenght (in bytes) of the secret
+ *                       keying material to be derived; how long the output will be.
+ * @param fixedInfo      A bit string of context-specific data that is appropiate for the relying key-establishment scheme.
+ *                       FixedInfo may, for example, include appropriately formatted representations of the values of salt and/or L.
+ *                       The inclusion of additional copies of the values of salt and L in FixedInfo would ensure that
+ *                       each block of derived keying material is affected by all of the information
+ *                       conveyed in OtherInput. See [SP 800-56A] and [SP 800-56B] for more detailed
+ *                       recommendations concerning the format and content of FixedInfo.
+ * @returns The derived keying material.
+ * @throws IllegalArgumentException if `outLengthBytes` is 0 bytes.
+ */
+export const singleStepKDF = (
+  hash: Hash,
+  sharedSecretZ: Uint8Array,
+  outLengthBytes: number,
+  fixedInfo: Uint8Array
+): Uint8Array => {
+  checkOutLength(outLengthBytes);
 
-  /**
-   * KDM - a one step key derivation function as described in NIST SP 800-56C REV 1 Chapter 4.1.
-   *
-   * Derives a key with the given parameters. At the moment, just derivation using SHA-256 is available.
-   *
-   * @param hash           The hash to use.
-   * @param sharedSecretZ  Known as `Z` in the spec: a byte string that represents the shared secret
-   * @param outLengthBytes Knnown as `L` in the spec: positive integer that indicates the lenght (in bytes) of the secret
-   *                       keying material to be derived; how long the output will be.
-   * @param fixedInfo      A bit string of context-specific data that is appropiate for the relying key-establishment scheme.
-   *                       FixedInfo may, for example, include appropriately formatted representations of the values of salt and/or L.
-   *                       The inclusion of additional copies of the values of salt and L in FixedInfo would ensure that
-   *                       each block of derived keying material is affected by all of the information
-   *                       conveyed in OtherInput. See [SP 800-56A] and [SP 800-56B] for more detailed
-   *                       recommendations concerning the format and content of FixedInfo.
-   * @returns The derived keying material.
-   * @throws IllegalArgumentException if `outLengthBytes` is 0 bytes.
-   */
-  public derive(
-    hash: Hash,
-    sharedSecretZ: Uint8Array,
-    outLengthBytes: number,
-    fixedInfo: Uint8Array
-  ): Uint8Array {
-    this.checkOutLength(outLengthBytes);
+  // sha256 is 32 byte long block
+  const digestByteLength = getHashLength("sha256");
 
-    // sha256 is 32 byte long block
-    const digestByteLength = getHashLength("sha256");
+  const buffer = Buffer.alloc(outLengthBytes);
 
-    const buffer = Buffer.alloc(outLengthBytes);
-
-    const reps = Math.ceil(outLengthBytes / digestByteLength);
-    /*
+  const reps = Math.ceil(outLengthBytes / digestByteLength);
+  /*
      1. If L > 0, then set reps = [L / H_outputBits]
         otherwise, output an error indicator and exit
         this process without performing the remaining
@@ -121,27 +120,24 @@ class SingleStepKDF {
         bits of Result(reps).
      8. Output DerivedKeyingMaterial.
      */
-    let counter = 1;
-    let outputLenSum = 0;
+  let counter = 1;
+  let outputLenSum = 0;
 
-    do {
-      crypto
-        .createHash(hash)
-        .update(this.intTo4Bytes(counter))
-        .update(sharedSecretZ)
-        .update(fixedInfo)
-        .digest()
-        .copy(
-          buffer,
-          0,
-          0,
-          reps === counter ? outLengthBytes - outputLenSum : digestByteLength
-        );
+  do {
+    crypto
+      .createHash(hash)
+      .update(intTo4Bytes(counter))
+      .update(sharedSecretZ)
+      .update(fixedInfo)
+      .digest()
+      .copy(
+        buffer,
+        0,
+        0,
+        reps === counter ? outLengthBytes - outputLenSum : digestByteLength
+      );
 
-      outputLenSum += digestByteLength;
-    } while (counter++ < reps);
-    return new Uint8Array(buffer.toJSON().data);
-  }
-}
-
-export default new SingleStepKDF();
+    outputLenSum += digestByteLength;
+  } while (counter++ < reps);
+  return new Uint8Array(buffer.toJSON().data);
+};

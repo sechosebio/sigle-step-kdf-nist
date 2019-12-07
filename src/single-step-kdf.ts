@@ -88,7 +88,6 @@ export const singleStepKDF = (
 ): Uint8Array => {
   checkOutLength(outLengthBytes);
 
-  // sha256 is 32 byte long block
   const digestByteLength = getHashLength("sha256");
 
   const buffer = Buffer.alloc(outLengthBytes);

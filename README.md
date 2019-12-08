@@ -1,6 +1,6 @@
-[![npm](https://img.shields.io/npm/v/sigle-step-kdf-nist)](https://www.npmjs.com/package/sigle-step-kdf-nist)
-[![Build Status](https://travis-ci.org/sechosebio/sigle-step-kdf-nist.svg?branch=master)](https://travis-ci.org/sechosebio/sigle-step-kdf-nist)
-[![Maintainability](https://api.codeclimate.com/v1/badges/1ab74c42039ea1c279f8/maintainability)](https://codeclimate.com/github/sechosebio/sigle-step-kdf-nist/maintainability)
+[![npm](https://img.shields.io/npm/v/single-step-kdf-nist)](https://www.npmjs.com/package/single-step-kdf-nist)
+[![Build Status](https://travis-ci.org/sechosebio/single-step-kdf-nist.svg?branch=master)](https://travis-ci.org/sechosebio/single-step-kdf-nist)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1ab74c42039ea1c279f8/maintainability)](https://codeclimate.com/github/sechosebio/single-step-kdf-nist/maintainability)
 
 # Single Step KDF (NIST SP 800-56C)
 
@@ -8,18 +8,17 @@ Single-Step Key Derivation function following [NIST SP 800-56C revision 1, chapt
 
 ## Quick start
 
-Add dependency to your proyect: 
+Add dependency to your proyect:
 
-- Yarn: 
+- Yarn:
 
-`yarn add sigle-step-kdf-nist`
+`yarn add single-step-kdf-nist`
 
 - npm:
 
-`npm i sigle-step-kdf-nist`
+`npm i single-step-kdf-nist`
 
-
-Simple example: 
+Simple example:
 
 ```
 
@@ -42,26 +41,26 @@ const hexSingleStepKDF = () => {
 
 ```
 
-
 # Build
 
 Use yarn to build the project.
 
 `yarn build`
 
-# Test 
+# Test
 
 `yarn test`
 
 # TODO
 
-Implement different H-Functions: 
+Implement different H-Functions:
 
-- [X] Message digest.
+- [x] Message digest.
 - [ ] HMAC.
 - [ ] KMAC.
 
-Others: 
+Others:
+
 - [ ] Improve README.
 
 # License

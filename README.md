@@ -29,6 +29,18 @@ const hexSingleStepKDF = () => {
 
 ```
 
+
+# TODO
+
+Implement different H-Functions: 
+
+- [X] Message digest.
+- [ ] HMAC.
+- [ ] KMAC.
+
+Others: 
+- [ ] Improve README.
+
 # License
 
 Licensed under the Apache License, Version 2.0 (the "License");

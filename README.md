@@ -8,6 +8,19 @@ Single-Step Key Derivation function following [NIST SP 800-56C revision 1, chapt
 
 ## Quick start
 
+Add dependency to your proyect: 
+
+- Yarn: 
+
+`yarn add sigle-step-kdf-nist`
+
+- npm:
+
+`npm i sigle-step-kdf-nist`
+
+
+Simple example: 
+
 ```
 
 import { singleStepKDF, hexToBytes, bytesToHex } from "single-step-kdf";
@@ -29,6 +42,16 @@ const hexSingleStepKDF = () => {
 
 ```
 
+
+# Build
+
+Use yarn to build the project.
+
+`yarn build`
+
+# Test 
+
+`yarn test`
 
 # TODO
 
